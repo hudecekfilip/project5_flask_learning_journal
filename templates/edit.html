@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if current_user.id != stream.user.id %}
+    <div class="entry-list single">
+        <h1>You don't have access to this page!</h1>
+        <h2>This entry belongs to someone else!</h2>
+    </div>
+{% else %}
+    <div class="edit-entry">
+        <h2>Edit Entry</h2>
+        <form method="POST" action="" class="form">
+            {{ form.hidden_tag() }}
+
+            {{ form.title.label }}
+            {% for error in form.title.errors %}
+                <div class="notification error">{{ error }}</div>
+            {% endfor %}
+            {{ form.title(placeholder=stream.title) }}
+
+            {{ form.date.label }}
+            {% for error in form.date.errors %}
+                <div class="notification error">{{ error }}</div>
+            {% endfor %}
+            {{ form.date(placeholder=stream.date) }}
+
+            {{ form.time_spent.label }}
+            {% for error in form.time_spent.errors %}
+                <div class="notification error">{{ error }}</div>
+            {% endfor %}
+            {{ form.time_spent(placeholder=stream.time_spent) }}
+
+            {{ form.what_i_learned.label }}
+            {% for error in form.what_i_learned.errors %}
+                <div class="notification error">{{ error }}</div>
+            {% endfor %}
+            {{ form.what_i_learned(placeholder=stream.learned) }}
+
+            {{ form.resources_to_remember.label }}
+            {% for error in form.resources_to_remember.errors %}
+                <div class="notification error">{{ error }}</div>
+            {% endfor %}
+            {{ form.resources_to_remember(placeholder=stream.resources) }}
+
+            {{ form.tags.label }}
+            {% for error in form.tags.errors %}
+                <div class="notification error">{{ error }}</div>
+            {% endfor %}
+            {{ form.tags(placeholder=stream.tags) }}
+
+            <input type="submit" value="Edit Entry" class="button">
+            <a href="#" class="button button-secondary">Cancel</a>
+        </form>
+    </div>
+{% endif %}
+{% endblock %}

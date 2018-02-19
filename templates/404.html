@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="entry-list">
+    <h1>404</h1>
+    <p>Sorry, that page does not exist.</p>
+    <p><a href="{{ url_for('index') }}">Try again</a></p>
+</div>
+
+{% endblock %}

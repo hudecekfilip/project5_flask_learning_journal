@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="entry-list">
+        {% for entry in stream %}
+            <article>
+                <h2><a href="/entries/{{ entry.id }}">{{ entry.title }}</a></h2>
+                <time datetime="{{ entry.date }}">{{ entry.date }}</time>
+                <h3>Tags: <a href="/entries/tags/{{ entry.tags }}">{{ entry.tags }}</a></h3>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

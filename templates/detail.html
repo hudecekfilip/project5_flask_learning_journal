@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if current_user.id != stream.user.id %}
+    <div class="entry-list single">
+        <h1>You don't have access to this page!</h1>
+        <h2>This entry belongs to someone else!</h2>
+    </div>
+{% else %}
+    {% if stream.deleted == True %}
+        <div class="entry-list single">
+            <h1>This entry has been deleted!</h1>
+            <h1><a href="/entries/recover/{{ stream.id }}">Do you want to recover it?</a></h1>
+        </div>
+    {% else %}
+        <div class="entry-list single">
+            <article>
+                <h1>{{ stream.title }}</h1>
+                <time datetime="{{ stream.date }}">{{ stream.date }}</time>
+                <div class="entry">
+                    <h3>Time Spent: </h3>
+                    <p>{{ stream.time_spent }} hours</p>
+                </div>
+                <div class="entry">
+                    <h3>What I Learned:</h3>
+                    <p>{{ stream.learned }}</p>
+                </div>
+                <div class="entry">
+                    <h3>Resources to Remember:</h3>
+                        <p><{{ stream.resources }}<p>
+                <div class="entry">
+                    <h3>Tags:</h3>
+                    <p>{{ stream.tags }}</p>
+                </div>
+            </article>
+        </div>
+        <div class="edit">
+            <p><a href="/entries/edit/{{ stream.id }}">Edit Entry</a></p>
+            <p><a href="/entries/delete/{{ stream.id }}" class="delete">Delete Entry</a></p>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}

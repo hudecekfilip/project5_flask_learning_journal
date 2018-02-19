@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="new-entry">
+    <h2>New Entry</h2>
+    <form method="POST" action="" class="form">
+        {{ form.hidden_tag() }}
+
+        {{ form.title.label }}
+        {% for error in form.title.errors %}
+            <div class="notification error">{{ error }}</div>
+        {% endfor %}
+        {{ form.title }}
+
+        {{ form.date.label }}
+        {% for error in form.date.errors %}
+            <div class="notification error">{{ error }}</div>
+        {% endfor %}
+        {{ form.date(type="date") }}
+
+        {{ form.time_spent.label }}
+        {% for error in form.time_spent.errors %}
+            <div class="notification error">{{ error }}</div>
+        {% endfor %}
+        {{ form.time_spent }}
+
+        {{ form.what_i_learned.label }}
+        {% for error in form.what_i_learned.errors %}
+            <div class="notification error">{{ error }}</div>
+        {% endfor %}
+        {{ form.what_i_learned }}
+
+        {{ form.resources_to_remember.label }}
+        {% for error in form.resources_to_remember.errors %}
+            <div class="notification error">{{ error }}</div>
+        {% endfor %}
+        {{ form.resources_to_remember }}
+
+        {{ form.tags.label }}
+        {% for error in form.tags.errors %}
+            <div class="notification error">{{ error }}</div>
+        {% endfor %}
+        {{ form.tags }}
+
+        <input type="submit" value="Publish Entry" class="button">
+        <a href="#" class="button button-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

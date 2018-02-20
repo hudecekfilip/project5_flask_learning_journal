@@ -21,7 +21,7 @@ class NewEntryForm(FlaskForm):
 class EditEntryForm(FlaskForm):
     title = StringField('Title')
     date = StringField('Date')
-    time_spent = IntegerField('Time Spent')
+    time_spent = StringField('Time Spent')
     what_i_learned = TextAreaField('What I Learned')
     resources_to_remember = TextAreaField('Resources To Remember')
     tags = StringField('Tags')

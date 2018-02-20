@@ -77,11 +77,16 @@ def edit_entry(entry_id):
     form = forms.EditEntryForm()
     if form.validate_on_submit():
         query = models.Entry.select().where(models.Entry.id == entry_id).get()
-        query.title = form.title.data
-        query.date = form.date.data
-        query.time_spent = form.time_spent.data
-        query.learned = form.what_i_learned.data
-        query.resources = form.resources_to_remember.data
+        if form.title.data:
+            query.title = form.title.data
+        if form.date.data:
+            query.date = form.date.data
+        if form.time_spent.data:
+            query.time_spent = form.time_spent.data
+        if form.what_i_learned.data:
+            query.learned = form.what_i_learned.data
+        if form.resources_to_remember.data:
+            query.resources = form.resources_to_remember.data
         query.save()
         flash("Your entry '{}' has been successfully updated!".format(query.title), "success")
         return redirect(url_for('index'))
@@ -139,7 +144,8 @@ def view_entry(entry_id):
         entries = models.Entry.select().where(models.Entry.id == entry_id).get()
     except models.DoesNotExist:
         abort(404)
-    return render_template('detail.html', stream=entries)
+    list1 = entries.resources.splitlines()
+    return render_template('detail.html', stream=entries, list1=list1)
 
 
 @app.route('/login', methods=('GET', 'POST'))
